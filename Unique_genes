@@ -1,0 +1,78 @@
+# look into the gene of interests that are unique from LSDV, GTPV, and SPPV
+
+# make a fasta file of sequences of unique genes from pan_genome_reference.fa file
+more pan_genome_reference.fa
+
+# extract particular sequence from fasta file
+
+awk '/^>/{f=0} /^>header_name/{f=1} f' file.fasta
+
+awk '/^>/{f=0} /^>group_33/{f=1} f' pan_genome_reference.fa
+awk '/^>/{f=0} /^>group_31/{f=1} f' pan_genome_reference.fa
+awk '/^>/{f=0} /^>group_30/{f=1} f' pan_genome_reference.fa
+awk '/^>/{f=0} /^>group_25/{f=1} f' pan_genome_reference.fa
+awk '/^>/{f=0} /^>group_8/{f=1} f' pan_genome_reference.fa
+awk '/^>/{f=0} /^>group_10/{f=1} f' pan_genome_reference.fa
+awk '/^>/{f=0} /^>LD067/{f=1} f' pan_genome_reference.fa
+
+# copy gene sequence along with the identifier (>)
+ctrl+c
+
+# make a fasta document for gene of interest
+emacs file_name.fa
+
+# save the file
+
+# creating database of reference genome using KX894508.fasta file --> look into LSDV_116/ANNOTATION folder and make a database of reference genome
+
+makeblastdb -in KX894508.1_Lumpy_skin_disease_virus_155920_2012_Israel_19_Dec_2012_Bos_taurus.fa -dbtype nucl -out ~/LSDV_db 
+        # ~/LSDV_db is the database name
+
+makeblastdb -in NC_004003.1_Goatpox_virus_Pellor_2000.fa -dbtype nucl -out ~/GTPV_db
+
+makeblastdb -in NC_004002.1_17077_99_1970_sheep.fa -dbtype nucl -out ~/SPPV_db
+
+
+# creating database of pan_genome_reference.fa containing all of the genes
+
+makeblastdb -in pan_genome_reference.fa -dbtype nucl -out ~/pan_db 
+
+# blast the unique gene sequences into the database
+
+# /usr/bin/blastn -db ~/pan_db  -query ~/query.fa  -out ~/query2.out
+
+
+/usr/bin/blastn -db ~/LSDV_db  -query group_33.fa  -out group_33_to_LSDV.out -outfmt 6
+/usr/bin/blastn -db ~/SPPV_db  -query group_33.fa  -out group_33_to_SPPV.out -outfmt 6
+/usr/bin/blastn -db ~/GTPV_db  -query group_33.fa  -out group_33_to_GTPV.out -outfmt 6
+
+/usr/bin/blastn -db ~/LSDV_db  -query group_31.fa  -out group_31_to_LSDV.out -outfmt 6
+/usr/bin/blastn -db ~/SPPV_db  -query group_31.fa  -out group_31_to_SPPV.out -outfmt 6
+/usr/bin/blastn -db ~/GTPV_db  -query group_31.fa  -out group_31_to_GTPV.out -outfmt 6
+
+/usr/bin/blastn -db ~/LSDV_db  -query group_30.fa  -out group_30_to_LSDV.out -outfmt 6
+/usr/bin/blastn -db ~/SPPV_db  -query group_30.fa  -out group_30_to_SPPV.out -outfmt 6
+/usr/bin/blastn -db ~/GTPV_db  -query group_30.fa  -out group_30_to_GTPV.out -outfmt 6
+
+/usr/bin/blastn -db ~/LSDV_db  -query group_25.fa  -out group_25_to_LSDV.out -outfmt 6
+/usr/bin/blastn -db ~/SPPV_db  -query group_25.fa  -out group_25_to_SPPV.out -outfmt 6
+/usr/bin/blastn -db ~/GTPV_db  -query group_25.fa  -out group_25_to_GTPV.out -outfmt 6
+
+/usr/bin/blastn -db ~/LSDV_db  -query group_8.fa  -out group_8_to_LSDV.out -outfmt 6
+/usr/bin/blastn -db ~/SPPV_db  -query group_8.fa  -out group_8_to_SPPV.out -outfmt 6
+/usr/bin/blastn -db ~/GTPV_db  -query group_8.fa  -out group_8_to_GTPV.out -outfmt 6
+
+/usr/bin/blastn -db ~/LSDV_db  -query group_10.fa  -out group_10_to_LSDV.out -outfmt 6
+/usr/bin/blastn -db ~/SPPV_db  -query group_10.fa  -out group_10_to_SPPV.out -outfmt 6
+/usr/bin/blastn -db ~/GTPV_db  -query group_10.fa  -out group_10_to_GTPV.out -outfmt 6
+
+/usr/bin/blastn -db ~/LSDV_db  -query LD067.fa  -out LD067_to_LSDV.out -outfmt 6
+/usr/bin/blastn -db ~/SPPV_db  -query LD067.fa  -out LD067_2_to_SPPV.out -outfmt 6
+/usr/bin/blastn -db ~/GTPV_db  -query LD067.fa  -out LD067_to_GTPV.out -outfmt 6
+
+
+# we finally get the information of the gene including the coordinate of the gene inside the genome. Take notes of the gene coordinate.
+
+# look into the reference genome genebank file containing all of the annotated genes (KX89450.gb file) and look for the gene of interest coordinate inside the reference genome
+
+# take notes of the protein id --> look for its function in the database, as well as other information --> interpret the results
