@@ -1,0 +1,27 @@
+---
+title: "P-value correction using the Benjamini-Hochberg approach"
+---
+
+```{r}
+
+
+# INPUT SAMPLES
+adjusted_p_values <- p.adjust(c(pvalue1, pvalue2, pvalue3), method="BH", number_of_sample_tested)
+print(adjusted_p_values)
+
+# Identify significant results at FDR = 0.05
+significant <- adjusted_p_values < 0.05
+print(significant)
+
+# IP SAMPLES
+adjusted_p_values <- p.adjust(c(pvalue1, pvalue2, pvalue3, pvalue4, pvalue5), method="BH", number_of_sample_tested)
+print(adjusted_p_values)
+
+# Identify significant results at FDR = 0.05
+significant <- adjusted_p_values < 0.05
+print(significant)
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

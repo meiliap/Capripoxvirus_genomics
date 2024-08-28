@@ -1,0 +1,31 @@
+---
+title: "CPPV_Pangenome"
+output: pdf_document
+---
+
+```{r}
+
+
+# Import the necessary library
+
+library("ggplot2")
+
+
+# make a heatmap
+
+x2 <- as.data.frame(read.csv("file.Rtab", sep="\t"))
+str(x2) # samples as columns, genes as rows
+rownames(x2) <- x2[,1] # reassign row (ie, gene) names
+x2 <- x2[,-1] # remove gene names from table (not needed)
+my_colors <- c("#800074", "#298c8c")
+
+# x2[x2 == 0] <- NA
+pdf("heatmap.pdf", width=45, height=40)
+heatmap(as.matrix(x2), col=my_colors, scale="none", margins = c(59,8))
+legend("topright", legend = c("Gene absent", "Gene present"), fill = my_colors, title = "Legend", cex = 2)
+dev.off()
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

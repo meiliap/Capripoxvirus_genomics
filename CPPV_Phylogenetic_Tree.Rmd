@@ -1,0 +1,32 @@
+
+---
+title: "CPPV_Phylogenetic_Tree"
+output: pdf_document
+---
+
+```{r}
+
+
+##Import the necessary libraries
+
+
+library(ggtree)   # ggtree v2.4.1
+library(phytools) # phytools v0.7-70
+library(ggplot2)  # ggplot v2_3.3.3
+library(ape)      # ape v5.5
+library(treeio)   # treeio v1.14.3
+
+
+# tree file from RAxML after Mafft alignment
+tree <- read.tree("file.raxml.supportTBE")
+
+tree$node.label <- round(100*as.numeric(tree$node.label),0)
+hh <- ggtree(midpoint.root(ladderize(tree)), size=0.5) +   geom_tiplab(hjust=0, size=1)+   geom_treescale(offset=0.35, fontsize =4) + geom_tippoint(size=1)  
+pdf("file.pdf", width=27, height=15)
+hh + coord_cartesian(clip='off') + theme_tree2(plot.margin=margin(6,110,6,6))
+dev.off()
+
+
+
+### end 
+```

@@ -1,0 +1,32 @@
+
+
+---
+title: "CPPV_Genome_Length"
+output: pdf_document
+---
+
+```{r}
+
+
+
+####################################################
+## Data Visualization for Genome Length Histogram ##
+####################################################
+
+# Create two example datasets
+
+xmin <- min(file)
+xmax <- max(file)
+
+# Create the first histogram
+hist(file, main = "", xlab = "Name", ylab = "Name",
+     col = "#298c8c", xlim = c(138000, xmax), breaks=99)
+# Create the second histogram
+hist(file, main = "Histogram 2", xlab = "Name", ylab = "Name",
+     col = "#800074", add = TRUE, xlim = c(xmin, xmax))
+grid()
+
+
+
+### end 
+```

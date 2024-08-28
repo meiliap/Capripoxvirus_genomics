@@ -1,0 +1,33 @@
+---
+title: "CPPV_Pangenome"
+---
+
+```{r}
+
+
+# Aligning one sequence against another with BLAST
+# Using Artemis Comparison Tool (ACT)
+
+# Steps:
+# 1. run makeblastdb to make the database
+# 2. run BLAST to align the query with this database
+
+General commands:
+
+# make a DNA database from the sequence "example.fasta" called EXAMPLE_DB
+makeblastdb -dbtype nucl -in example.fasta -out EXAMPLE_DB
+
+
+# search for "query.fasta" in EXAMPLE_DB with tabular output (-outfmt 6)
+# this is sent to the file blast.out
+blastn -db EXAMPLE_DB -query query.fasta -outfmt 6 > blast.out
+
+
+# Run Artemis for Comparison Analysis
+./act file1.gb blast1.out file2.gb  blast2.out file3.gb
+
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
